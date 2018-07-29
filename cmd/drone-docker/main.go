@@ -8,7 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/urfave/cli"
 
-	"github.com/drone-plugins/drone-docker"
+	"github.com/yukimochi-containers/drone-docker"
 )
 
 var build = "0" // build number set at compile-time

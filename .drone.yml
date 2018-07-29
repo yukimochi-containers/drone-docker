@@ -1,6 +1,6 @@
 workspace:
   base: /go
-  path: src/github.com/drone-plugins/drone-docker
+  path: src/github.com/yukimochi-containers/drone-docker
 
 pipeline:
   build:
@@ -12,42 +12,32 @@ pipeline:
       - go test -cover ./...
       - sh .drone.sh
 
-  publish:
+  publish-amd64:
     image: plugins/docker
-    repo: plugins/docker
-    tags: [ "latest", "17", "17.12" ]
+    repo: yukimochi/drone-docker
+    tags: [ "amd64", "amd64_18.06" ]
     secrets: [ docker_username, docker_password ]
     dockerfile: docker/Dockerfile
     when:
       branch: master
       event: push
 
-  publish_heroku:
+  publish-arm:
     image: plugins/docker
-    repo: plugins/heroku
-    tags: [ "latest", "17", "17.12" ]
+    repo: yukimochi/drone-docker
+    tags: [ "arm", "arm_18.06" ]
     secrets: [ docker_username, docker_password ]
-    dockerfile: docker/heroku/Dockerfile
+    dockerfile: docker/Dockerfile.arm
     when:
       branch: master
       event: push
 
-  publish_gcr:
+  publish-arm64:
     image: plugins/docker
-    repo: plugins/gcr
-    tags: [ "latest", "17", "17.10" ]
+    repo: yukimochi/drone-docker
+    tags: [ "arm64" ,"arm64_18.06" ]
     secrets: [ docker_username, docker_password ]
-    dockerfile: docker/gcr/Dockerfile
-    when:
-      branch: master
-      event: push
-
-  publish_ecr:
-    image: plugins/docker
-    repo: plugins/ecr
-    tags: [ "latest", "17", "17.10" ]
-    secrets: [ docker_username, docker_password ]
-    dockerfile: docker/ecr/Dockerfile
+    dockerfile: docker/Dockerfile.arm64
     when:
       branch: master
       event: push

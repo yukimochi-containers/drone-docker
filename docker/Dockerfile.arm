@@ -1,1 +1,6 @@
-# see https://github.com/docker-library/docker/issues/67
+# docker build --rm -f docker/Dockerfile -t plugins/docker .
+
+FROM arm32v6/docker:18.06.0-ce-dind
+
+ADD release/linux/arm/drone-docker /bin/
+ENTRYPOINT ["/usr/local/bin/dockerd-entrypoint.sh", "/bin/drone-docker"]
